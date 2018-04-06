@@ -20,11 +20,13 @@ This is a game inspired by BM Tron created in processing
 - Arrow keys
 
 ## To do list:
-[ ] Add a restart game feature
+[X] Add a restart game feature
 
-[ ] Add a second player
+[X] Add a second player
 
 [ ] Add a point system
+
+[ ] Menu
 
 [ ] Add a cpu
 
