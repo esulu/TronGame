@@ -3,24 +3,35 @@
  04-06-2018
  */
 
-int borderStroke = 10;
-int x = 100;
-int y = 100;
-char moving = 'r';
+int x1 = 100;
+int y1 = 100;
+int x2 = 1500;
+int y2 = 1500;
+char moving1 = 'r';
+char moving2 = 'l';
 boolean gameOver = false;
+
+void reset() {
+  x1 = 100;
+  y1 = 100;
+  x2 = 1500;
+  y2 = 1500;
+  moving1 = 'r';
+  moving2 = 'l';
+  gameOver = false;
+}
 
 void setup() {
   size (1600, 1600);
   background(0);
-  //fill(255, 196, 44);
   fill(255, 0, 0);
-  rect(0, 0, width, borderStroke); 
+  rect(0, 0, width, 10); 
   noStroke();
-  rect(width-borderStroke, 0, borderStroke, height); 
+  rect(width-10, 0, 10, height); 
   noStroke();
-  rect(0, height-borderStroke, width, borderStroke); 
+  rect(0, height-10, width, 10); 
   noStroke();
-  rect(0, 0, borderStroke, height); 
+  rect(0, 0, 10, height); 
   noStroke();
 }
 
@@ -31,40 +42,82 @@ void draw() {
     fill(255, 0, 0);
     text("GAME OVER", 800, 800);
   } else {
-    player();
+    player1();
+    player2();
   }
 }
 
-void player() {
-  if (get(x, y) == color(0, 0, 0)) { // Checks if the light cycle has interected with another trail
+void player1() {
+  if (get(x1, y1) == color(0, 0, 0)) { // Checks if the light cycle has interected with another trail
     fill(13, 233, 255);
-    rect(x, y, 10, 10);
+    rect(x1, y1, 10, 10);
     color(0, 0, 255);
     noStroke();
 
-    if (moving == 'u') {
-      y -= 10;
-    } else if (moving == 'd') {
-      y += 10;
-    } else if (moving == 'r') {
-      x += 10;
-    } else if (moving == 'l') {
-      x -= 10;
+    if (moving1 == 'u') {
+      y1 -= 10;
+    } else if (moving1 == 'd') {
+      y1 += 10;
+    } else if (moving1 == 'r') {
+      x1 += 10;
+    } else if (moving1 == 'l') {
+      x1 -= 10;
     }
   } else {
     gameOver = true;
   }
 }
 
-//TRY CHECKING IF KEY IS ALREADY PRESSED TO INCREASE SPEED
-void keyPressed() {
-  if (keyCode == 'W') { 
-    moving = 'u';
-  } else if (keyCode == 'S') {
-    moving = 'd';
-  } else if (keyCode == 'D') {
-    moving = 'r';
-  } else if (keyCode == 'A') {
-    moving = 'l';
+void player2() {
+  if (get(x2, y2) == color(0, 0, 0)) { // Checks if the light cycle has interected with another trail
+    fill(255, 196, 44);
+    rect(x2, y2, 10, 10);
+    color(0, 0, 255);
+    noStroke();
+
+    if (moving2 == 'u') {
+      y2 -= 10;
+    } else if (moving2 == 'd') {
+      y2 += 10;
+    } else if (moving2 == 'r') {
+      x2 += 10;
+    } else if (moving2 == 'l') {
+      x2 -= 10;
+    }
+  } else {
+    gameOver = true;
   }
 }
+
+void keyPressed() {
+  // Player 1
+  if (keyCode == 'W' && moving1 != 'd') { 
+    moving1 = 'u';
+  } else if (keyCode == 'S' && moving1 != 'u') {
+    moving1 = 'd';
+  } else if (keyCode == 'D' && moving1 != 'l') {
+    moving1 = 'r';
+  } else if (keyCode == 'A' && moving1 != 'r') {
+    moving1 = 'l';
+  }
+  // Player 2
+  if (keyCode == UP && moving2 != 'd') { 
+    moving2 = 'u';
+  } else if (keyCode == DOWN && moving2 != 'u') {
+    moving2 = 'd';
+  } else if (keyCode == RIGHT && moving2 != 'l') {
+    moving2 = 'r';
+  } else if (keyCode == LEFT && moving2 != 'r') {
+    moving2 = 'l';
+  }
+}
+
+void mousePressed() {
+  reset();
+  setup();
+}
+
+
+
+
+
