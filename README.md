@@ -14,9 +14,9 @@ This is a game inspired by BM Tron created in processing
 - Have fun :)
 
 ## Controls
-### Player 1:
+#### Player 1:
 - W, A, S, D 
-### Player 2 (coming soon):
+#### Player 2 (coming soon):
 - Arrow keys
 
 ## To do list:
