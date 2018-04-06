@@ -1,4 +1,4 @@
-# TronGame
+# Tron Game
 
 Created by Eren Sulutas
 04/06/2018
