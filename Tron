@@ -1,0 +1,70 @@
+/* BM Tron inspired game
+ Made by Eren Sulutas
+ 04-06-2018
+ */
+
+int borderStroke = 10;
+int x = 100;
+int y = 100;
+char moving = 'r';
+boolean gameOver = false;
+
+void setup() {
+  size (1600, 1600);
+  background(0);
+  //fill(255, 196, 44);
+  fill(255, 0, 0);
+  rect(0, 0, width, borderStroke); 
+  noStroke();
+  rect(width-borderStroke, 0, borderStroke, height); 
+  noStroke();
+  rect(0, height-borderStroke, width, borderStroke); 
+  noStroke();
+  rect(0, 0, borderStroke, height); 
+  noStroke();
+}
+
+void draw() {
+  if (gameOver) {
+    textAlign(CENTER);
+    textSize(70);
+    fill(255, 0, 0);
+    text("GAME OVER", 800, 800);
+  } else {
+    player();
+  }
+}
+
+void player() {
+  if (get(x, y) == color(0, 0, 0)) { // Checks if the light cycle has interected with another trail
+    fill(13, 233, 255);
+    rect(x, y, 10, 10);
+    color(0, 0, 255);
+    noStroke();
+
+    if (moving == 'u') {
+      y -= 10;
+    } else if (moving == 'd') {
+      y += 10;
+    } else if (moving == 'r') {
+      x += 10;
+    } else if (moving == 'l') {
+      x -= 10;
+    }
+  } else {
+    gameOver = true;
+  }
+}
+
+//TRY CHECKING IF KEY IS ALREADY PRESSED TO INCREASE SPEED
+void keyPressed() {
+  if (keyCode == 'W') { 
+    moving = 'u';
+  } else if (keyCode == 'S') {
+    moving = 'd';
+  } else if (keyCode == 'D') {
+    moving = 'r';
+  } else if (keyCode == 'A') {
+    moving = 'l';
+  }
+}
