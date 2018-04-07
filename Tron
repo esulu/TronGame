@@ -11,7 +11,8 @@ char moving1 = 'r';
 char moving2 = 'l';
 boolean playGame = false;
 boolean playMouse = false;
-boolean gameOver = false;
+boolean gameOver1 = false;
+boolean gameOver2 = false;
 
 void reset() {
   x1 = 100;
@@ -20,7 +21,8 @@ void reset() {
   y2 = 1500;
   moving1 = 'r';
   moving2 = 'l';
-  gameOver = false;
+  gameOver1 = false;
+  gameOver2 = false;
   setup();
 }
 
@@ -39,7 +41,7 @@ void setup() {
 }
 
 void draw() {
-  if (gameOver) {
+  if (gameOver1 || gameOver2) {
     textAlign(CENTER);
     textSize(70);
     fill(255, 0, 0);
@@ -47,6 +49,16 @@ void draw() {
     fill(255);
     textSize(30);
     text("Space to continue", 800, 800);
+
+    if (gameOver1 && !gameOver2) { // Player 2 victory
+      fill(255);
+      textSize(60);
+      text("Player 2 wins!", 800, 550);
+    } else if (gameOver2 && !gameOver1) { // Player 1 victory 
+      fill(255);
+      textSize(60);
+      text("Player 1 wins!", 800, 550);
+    }
   } else if (!playGame) {
     textAlign(CENTER);
     textSize(70);
@@ -82,7 +94,7 @@ void player1() {
       x1 -= 10;
     }
   } else {
-    gameOver = true;
+    gameOver1 = true;
   }
 }
 
@@ -102,7 +114,7 @@ void player2() {
       x2 -= 10;
     }
   } else {
-    gameOver = true;
+    gameOver2 = true;
   }
 }
 
