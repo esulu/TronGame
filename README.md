@@ -24,5 +24,5 @@ This is a game inspired by BM Tron created in processing
 - [x] Add a second player
 - [ ] Add a point system
 - [x] Menu
-- [ ] Add a cpu
+- [x] Add a cpu
 - [ ] Customizability? 
