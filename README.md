@@ -7,7 +7,7 @@ This is a game inspired by BM Tron created in processing
 
 ## How to play 
 - Move your light cycle and avoid colliding with your enemies' walls or your walls
-- Note: Side walls will also cause collision
+- Note: Border walls will also cause collision
 
 ## Objective
 - Take out your enemy and be the first to 5 points (coming soon)
