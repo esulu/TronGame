@@ -2,16 +2,23 @@
  Made by Eren Sulutas
  04-06-2018
  */
- 
+
 Cycle[] cycle;
 CycleBot[] cycleBot;
 boolean playUser = false;
 boolean playBot = false;
 int playMode;
-ArrayList<Boolean> isAlive = new ArrayList<Boolean>();
+public int gameScoreUser = 0;
+public int gameScoreBot = 0;
 boolean gameOver = false;
+public int[] turnsDeadUser;
+public int[] turnsDeadBot;
 
 void reset() {
+  turnsDeadUser = new int[2];
+  turnsDeadBot = new int[3];
+  gameScoreUser = 0;
+  gameScoreBot = 0;
   cycle[0] = new Cycle(100, 100, 'r');
   cycle[1] = new Cycle(1500, 1500, 'l');
   cycleBot[0] = new CycleBot(1500, 1500, 'l');
@@ -43,6 +50,7 @@ void setup() {
 }
 
 void draw() {
+  
   if (gameOver) {
     textAlign(CENTER);
     textSize(70);
@@ -51,16 +59,44 @@ void draw() {
     fill(255);
     textSize(30);
     text("Space to continue", 800, 800);
-/*
-    if (gameOver1 && !gameOver2) { // Player 2 victory
-      fill(255);
-      textSize(60);
-      text("Player 2 wins!", 800, 550);
-    } else if (gameOver2 && !gameOver1) { // Player 1 victory 
-      fill(255);
-      textSize(60);
-      text("Player 1 wins!", 800, 550);
-    }*/
+    fill(255);
+    textSize(60);
+    fill(255);
+    textSize(60);
+
+    if (playMode == 1) { // 1 v 1
+      if (cycle[0].isAlive() && !cycle[1].isAlive()) { // Player 1 victory 
+        text("Player 1 wins!", 800, 550);
+      } else if (!cycle[0].isAlive() && cycle[1].isAlive()) { // Player 2 victory 
+        text("Player 2 wins!", 800, 550);
+      } else {
+        gameDraw();
+      }
+    } else if (playMode == 2) { // 1 v 1 bot
+      if (cycle[0].isAlive() && !cycleBot[0].isAlive()) { // Player 1 victory 
+        text("Player 1 wins!", 800, 550);
+      } else if (!cycle[0].isAlive() && cycleBot[0].isAlive()) { // CPU victory 
+        text("CPU wins!", 800, 550);
+      } else {
+        gameDraw();
+      }
+    } else if (playMode == 3) { // 2 v 2
+      if ((cycle[0].isAlive() || cycle[1].isAlive()) && (!cycleBot[1].isAlive() && !cycleBot[2].isAlive())) { // Player victory 
+        text("Players win!", 800, 550);
+      } else if (!cycle[0].isAlive() && !cycle[1].isAlive() && (cycleBot[1].isAlive() || cycleBot[2].isAlive())) { // CPU victory 
+        text("CPU win!", 800, 550);
+      } else {
+        gameDraw();
+      }
+    } else if (playMode == 4) { // FFA
+      if (cycle[0].isAlive() && !cycleBot[0].isAlive() && !cycleBot[1].isAlive() && !cycleBot[2].isAlive()) { // Player victory 
+        text("Player wins!", 800, 550);
+      } else if ((!cycle[0].isAlive() && (cycleBot[0].isAlive()) || cycleBot[1].isAlive() || cycleBot[2].isAlive())) { // CPU victory 
+        text("CPU wins!", 800, 550);
+      } else {
+        gameDraw();
+      }
+    }
   } else if (playMode == 0) {
     textAlign(CENTER);
     textSize(70);
@@ -96,6 +132,27 @@ void draw() {
     cycleBot[1].playBot(1);
     cycleBot[2].playBot(2);
   }
+  gameIsOver();
+}
+
+void gameDraw() {
+  text("Draw!", 800, 550);
+}
+
+void gameIsOver() {
+  if (playMode == 1 || playMode == 2) {
+    if ((gameScoreUser + gameScoreBot) >= 1) {
+      gameOver = true;
+    }
+  } else if (playMode == 3) {
+    if (gameScoreUser == 2 || gameScoreBot == 2) {
+      gameOver = true;
+    }
+  } else if (playMode == 4) {
+    if (gameScoreUser == 1 || gameScoreBot == 3) {
+      gameOver = true;
+    }
+  }
 }
 
 void keyPressed() {
@@ -110,7 +167,7 @@ void keyPressed() {
     cycle[0].moving = 'l';
   }
   // Player 2
-  if (playMode == 1) {
+  if (playMode == 1 || playMode == 3) {
     if (keyCode == UP && cycle[1].moving != 'd') { 
       cycle[1].moving = 'u';
     } else if (keyCode == DOWN && cycle[1].moving != 'u') {
