@@ -35,7 +35,6 @@ class Cycle {
       if (turnsDeadUser[player-1] == 0) {
         gameScoreUser ++;
         turnsDeadUser[player-1] ++;
-        print("user dead: " + player);
       }
     }
   }
