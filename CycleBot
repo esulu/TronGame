@@ -59,8 +59,19 @@ class CycleBot {
           }
         }
       }
-    } /*else {
-     gameOver = true;
-     }*/
+    } else {
+      if (turnsDeadBot[order-1] == 0) {
+        gameScoreBot ++;
+        turnsDeadBot[order-1] ++;
+        print("bot dead");
+      }
+    }
+  }
+  boolean isAlive() {
+    if (get(x, y) != color(0, 0, 0)) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
