@@ -60,10 +60,9 @@ class CycleBot {
         }
       }
     } else {
-      if (turnsDeadBot[order-1] == 0) {
+      if (turnsDeadBot[order] == 0) {
         gameScoreBot ++;
-        turnsDeadBot[order-1] ++;
-        print("bot dead");
+        turnsDeadBot[order] ++;
       }
     }
   }
