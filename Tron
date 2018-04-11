@@ -2,36 +2,34 @@
  Made by Eren Sulutas
  04-06-2018
  */
-/*
-int x1 = 100;
-int y1 = 100;
-int x2 = 1500;
-int y2 = 1500;
-char moving1 = 'r';
-char moving2 = 'l';*/
-Cycle cycle1;
-Cycle cycle2;
-CycleBot cycleBot1;
+ 
+Cycle[] cycle;
+CycleBot[] cycleBot;
 boolean playUser = false;
 boolean playBot = false;
 int playMode;
-boolean gameOver1 = false;
-boolean gameOver2 = false;
+ArrayList<Boolean> isAlive = new ArrayList<Boolean>();
+boolean gameOver = false;
 
 void reset() {
-  cycle1 = new Cycle(100, 100, 'r');
-  cycle2 = new Cycle(1500, 1500, 'l');
-  cycleBot1 = new CycleBot(1500, 1500, 'l');
-  gameOver1 = false;
-  gameOver2 = false;
+  cycle[0] = new Cycle(100, 100, 'r');
+  cycle[1] = new Cycle(1500, 1500, 'l');
+  cycleBot[0] = new CycleBot(1500, 1500, 'l');
+  cycleBot[1] = new CycleBot(100, 1500, 'u');
+  cycleBot[2] = new CycleBot(1500, 100, 'd');
+  gameOver = false;
   setup();
 }
 
 void setup() {
   size (1600, 1600);
-  cycle1 = new Cycle(100, 100, 'r');
-  cycle2 = new Cycle(1500, 1500, 'l');
-  cycleBot1 = new CycleBot(1500, 1500, 'l');
+  cycle = new Cycle[2];
+  cycleBot = new CycleBot[3];
+  cycle[0] = new Cycle(100, 100, 'r');
+  cycle[1] = new Cycle(1500, 1500, 'l');
+  cycleBot[0] = new CycleBot(1500, 1500, 'l');
+  cycleBot[1] = new CycleBot(100, 1500, 'u');
+  cycleBot[2] = new CycleBot(1500, 100, 'd');
   background(0);
   fill(13, 233, 255);
   rect(0, 0, width, 10); 
@@ -45,7 +43,7 @@ void setup() {
 }
 
 void draw() {
-  if (gameOver1 || gameOver2) {
+  if (gameOver) {
     textAlign(CENTER);
     textSize(70);
     fill(255, 0, 0);
@@ -71,42 +69,56 @@ void draw() {
     textSize(50);
     text("2 Players", 810, 700);
     text("Vs CPU", 810, 800);
+    text("2 vs 2", 810, 900);
+    text("FFA", 810, 1000);
     fill(13, 233, 255);
     rect(720, 610, 172, 4);
     noFill();
     rect(695, 650, 225, 70);
     rect(695, 750, 225, 70);
+    rect(695, 850, 225, 70);
+    rect(695, 950, 225, 70);
     stroke(13, 233, 255);
   } else if (playMode == 1) {
-    cycle1.play(1);
-    cycle2.play(2);
+    cycle[0].play(1);
+    cycle[1].play(2);
   } else if (playMode == 2) {
-    cycle1.play(1);
-    cycleBot1.playBot();
+    cycle[0].play(1);
+    cycleBot[0].playBot(0);
+  } else if (playMode == 3) {
+    cycle[0].play(1);
+    cycle[1].play(2);
+    cycleBot[1].playBot(1);
+    cycleBot[2].playBot(2);
+  } else if (playMode == 4) {
+    cycle[0].play(1);
+    cycleBot[0].playBot(0);
+    cycleBot[1].playBot(1);
+    cycleBot[2].playBot(2);
   }
 }
 
 void keyPressed() {
   // Player 1
-  if (keyCode == 'W' && cycle1.moving != 'd') { 
-    cycle1.moving = 'u';
-  } else if (keyCode == 'S' && cycle1.moving != 'u') {
-    cycle1.moving = 'd';
-  } else if (keyCode == 'D' && cycle1.moving != 'l') {
-    cycle1.moving = 'r';
-  } else if (keyCode == 'A' && cycle1.moving != 'r') {
-    cycle1.moving = 'l';
+  if (keyCode == 'W' && cycle[0].moving != 'd') { 
+    cycle[0].moving = 'u';
+  } else if (keyCode == 'S' && cycle[0].moving != 'u') {
+    cycle[0].moving = 'd';
+  } else if (keyCode == 'D' && cycle[0].moving != 'l') {
+    cycle[0].moving = 'r';
+  } else if (keyCode == 'A' && cycle[0].moving != 'r') {
+    cycle[0].moving = 'l';
   }
   // Player 2
   if (playMode == 1) {
-    if (keyCode == UP && cycle2.moving != 'd') { 
-      cycle2.moving = 'u';
-    } else if (keyCode == DOWN && cycle2.moving != 'u') {
-      cycle2.moving = 'd';
-    } else if (keyCode == RIGHT && cycle2.moving != 'l') {
-      cycle2.moving = 'r';
-    } else if (keyCode == LEFT && cycle2.moving != 'r') {
-      cycle2.moving = 'l';
+    if (keyCode == UP && cycle[1].moving != 'd') { 
+      cycle[1].moving = 'u';
+    } else if (keyCode == DOWN && cycle[1].moving != 'u') {
+      cycle[1].moving = 'd';
+    } else if (keyCode == RIGHT && cycle[1].moving != 'l') {
+      cycle[1].moving = 'r';
+    } else if (keyCode == LEFT && cycle[1].moving != 'r') {
+      cycle[1].moving = 'l';
     }
   }
   //Restart
@@ -122,6 +134,12 @@ void mousePressed() {
   } else if (botButton()) {
     playMode = 2;
     reset();
+  } else if (twoOnTwoButton()) {
+    playMode = 3;
+    reset();
+  } else if (ffaButton()) {
+    playMode = 4;
+    reset();
   }
 }
 
@@ -135,6 +153,22 @@ boolean playerButton () {
 
 boolean botButton () { 
   if (mouseX >= 695 && mouseX <= 915 && mouseY >= 750 && mouseY <= 820) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+boolean twoOnTwoButton () { 
+  if (mouseX >= 695 && mouseX <= 915 && mouseY >= 850 && mouseY <= 920) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+boolean ffaButton () { 
+  if (mouseX >= 695 && mouseX <= 915 && mouseY >= 950 && mouseY <= 1020) {
     return true;
   } else {
     return false;
