@@ -31,8 +31,20 @@ class Cycle {
       } else if (moving == 'l') {
         x -= 10;
       }
-    } /*else {
-     gameOver = true;
-     }*/
+    } else {
+      if (turnsDeadUser[player-1] == 0) {
+        gameScoreUser ++;
+        turnsDeadUser[player-1] ++;
+        print("user dead: " + player);
+      }
+    }
+  }
+
+  boolean isAlive() {
+    if (get(x, y) != color(0, 0, 0)) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
