@@ -9,31 +9,16 @@ class CycleBot {
     this.moving = moving;
   }
 
-  // Method which moves the bot 
-  void play() {
-    if (get(x, y) == color(0, 0, 0)) { // Checks if the light cycle has intersected with another trail
-      fill(255, 196, 44);
-      noStroke();
-      rect(x, y, 10, 10);
-
-      if (moving == 'u') {
-        y -= 10;
-      } else if (moving == 'd') {
-        y += 10;
-      } else if (moving == 'r') {
-        x += 10;
-      } else if (moving == 'l') {
-        x -= 10;
-      }
-    } /*else {
-     gameOver = true;
-     }*/
-  }
-
   // Method which controls the moves of a bot
-  void playBot() {
+  void playBot(int order) {
     if (get(x, y) == color(0, 0, 0)) { // Checks if the light cycle has intersected with another trail
-      fill(255, 196, 44);
+      if (order == 0) {
+        fill(255, 196, 44);
+      } else if (order == 1) {
+        fill(255, 0, 0);
+      } else if (order == 2) {
+        fill(0, 255, 0);
+      }
       noStroke();
       rect(x, y, 10, 10);
 
