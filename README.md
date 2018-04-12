@@ -10,7 +10,7 @@ This is a game inspired by BM Tron created in processing
 - Note: Border walls will also cause collision
 
 ## Objective
-- Take out your enemy and be the first to 5 points (coming soon)
+- Take out your enemy/enemies and be the first to 5 points (coming soon)
 - Have fun :)
 
 ## Controls
@@ -18,6 +18,18 @@ This is a game inspired by BM Tron created in processing
 - W, A, S, D 
 #### Player 2:
 - Arrow keys
+
+## Game Modes
+#### Player Vs Player
+- 1v1 between two users
+#### Vs Bot
+- Player versus bot
+#### 2 v 2
+- 2 users versus two bots
+####  FFA
+- Free for all
+- User vs 3 bots 
+
 
 ## To do list:
 - [x] Add a restart game feature
