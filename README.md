@@ -38,5 +38,6 @@ This is a game inspired by BM Tron created in processing
 - [x] Add a cpu
 - [x] 4 players (Thanks to Denzel for the idea)
 - [x] Working end game conditions 
+- [ ] Return to main menu option
 - [ ] Add a point system
 - [ ] Customizability? 
