@@ -30,6 +30,10 @@ This is a game inspired by BM Tron created in processing
 - Free for all
 - User vs 3 bots 
 
+##Online Playable Version
+https://www.openprocessing.org/sketch/541613#
+Note: This was made using a 3200x1800 display so you may need to zoom out to play
+
 
 ## To do list:
 - [x] Add a restart game feature
