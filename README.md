@@ -8,6 +8,7 @@ This is a game inspired by BM Tron created in processing
 ## How to play 
 - Move your light cycle and avoid colliding with your enemies' walls or your walls
 - Note: Border walls will also cause collision
+- Be the last light cycle standing to win
 
 ## Objective
 - Take out your enemy/enemies and be the first to 5 points (coming soon)
@@ -22,13 +23,18 @@ This is a game inspired by BM Tron created in processing
 ## Game Modes
 #### Player Vs Player
 - 1v1 between two users
+- Last user standing wins
 #### Vs Bot
 - Player versus bot
+- Last light cycle standing wins
 #### 2 v 2
-- 2 users versus two bots
+- Two users versus two bots
+- Last team that has atleast 1 member standing wins
 ####  FFA
 - Free for all
 - User vs 3 bots 
+- User victory if all bots are eliminated
+- Bots win if the user is elminated 
 
 ## Online Playable Version
 https://www.openprocessing.org/sketch/541613#
