@@ -50,18 +50,21 @@ void setup() {
 }
 
 void draw() {
-  
+
   if (gameOver) {
     textAlign(CENTER);
     textSize(70);
     fill(255, 0, 0);
     text("GAME OVER", 800, 700);
     fill(255);
+    textSize(45);
+    text("Main Menu", 800, 850);
+    noFill();
+    stroke(255, 0, 0);
+    rect(675, 800, 250, 70);
     textSize(30);
-    text("Space to continue", 800, 800);
     fill(255);
-    textSize(60);
-    fill(255);
+    text("Space to continue", 800, 1000);
     textSize(60);
 
     if (playMode == 1) { // 1 v 1
@@ -185,18 +188,25 @@ void keyPressed() {
 }
 
 void mousePressed() {
-  if (playerButton()) {
-    playMode = 1;
-    reset();
-  } else if (botButton()) {
-    playMode = 2;
-    reset();
-  } else if (twoOnTwoButton()) {
-    playMode = 3;
-    reset();
-  } else if (ffaButton()) {
-    playMode = 4;
-    reset();
+  if (playMode == 0) { // Menu
+    if (playerButton()) {
+      playMode = 1;
+      reset();
+    } else if (botButton()) {
+      playMode = 2;
+      reset();
+    } else if (twoOnTwoButton()) {
+      playMode = 3;
+      reset();
+    } else if (ffaButton()) {
+      playMode = 4;
+      reset();
+    }
+  } else { 
+    if (menuButton()) {
+      playMode = 0;
+      reset();
+    }
   }
 }
 
@@ -226,6 +236,14 @@ boolean twoOnTwoButton () {
 
 boolean ffaButton () { 
   if (mouseX >= 695 && mouseX <= 915 && mouseY >= 950 && mouseY <= 1020) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+boolean menuButton () { 
+  if (mouseX >= 675 && mouseX <= 925 && mouseY >= 800 && mouseY <= 870) {
     return true;
   } else {
     return false;
