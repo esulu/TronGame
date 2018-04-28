@@ -43,6 +43,6 @@ Note: This was made using a 3200x1800 display so you may need to zoom out to pla
 - [x] Add a cpu
 - [x] 4 players (Thanks to Denzel for the idea)
 - [x] Working end game conditions 
-- [ ] Return to main menu option
+- [x] Return to main menu option
 - [ ] Add a point system
 - [ ] Customizability? 
